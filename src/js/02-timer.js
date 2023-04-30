@@ -45,10 +45,11 @@ timer = setInterval(() => {
     const newDate = Date.now();
     const currentDelta = datePicker.selectedDates[0] - newDate;
     //console.log(currentDelta);
-    const {days, hours, minutes, seconds } = convertMs(currentDelta);
-    console.log(`${days}:${hours}:${minutes}:${seconds}`)
+    const {days, hours, minutes, seconds} = convertMs(currentDelta);
+    console.log(`${days}:${hours}:${minutes}:${seconds}`);
+   updateTimerFace({days, hours, minutes, seconds});
 }, 1000)
-    
+     
 })
 
 
@@ -60,18 +61,25 @@ function convertMs(ms) {
   const day = hour * 24;
 
   // Remaining days
-  const days = Math.floor(ms / day);
+  const days = addLeadingZero(Math.floor(ms / day));
   // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
+  const hours = addLeadingZero(Math.floor((ms % day) / hour));
   // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
+  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
   // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
 
   return { days, hours, minutes, seconds };
 }
 
 function addLeadingZero(value) {
     return String(value).padStart(2, '0');
+}
+
+function updateTimerFace ({ days, hours, minutes, seconds }) {
+    refs.daysOutput.textContent = `${days}`;
+    refs.hoursOutput.textContent = `${hours}`;
+    refs.minutesOutput.textContent = `${minutes}`;
+    refs.secondsOutput.textContent = `${seconds}`;
 }
  
