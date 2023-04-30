@@ -39,13 +39,14 @@ const options = {
 const datePicker = flatpickr(refs.dateTimePicker, options);
 //console.log(datePicker)
 
+
 refs.startBtn.addEventListener('click', () => {
 timer = setInterval(() => {
     const newDate = Date.now();
     const currentDelta = datePicker.selectedDates[0] - newDate;
-    console.log(currentDelta);
-    const dateComponents = convertMs(currentDelta);
-    console.log(dateComponents)
+    //console.log(currentDelta);
+    const {days, hours, minutes, seconds } = convertMs(currentDelta);
+    console.log(`${days}:${hours}:${minutes}:${seconds}`)
 }, 1000)
     
 })
@@ -69,3 +70,8 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+
+function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+}
+ 
