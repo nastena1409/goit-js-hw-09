@@ -44,8 +44,10 @@ timer = setInterval(() => {
     const newDate = Date.now();
     const currentDelta = datePicker.selectedDates[0] - newDate;
     console.log(currentDelta);
-    //console.log('new', newDate)
+    const dateComponents = convertMs(currentDelta);
+    console.log(dateComponents)
 }, 1000)
+    
 })
 
 
