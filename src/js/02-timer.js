@@ -11,21 +11,37 @@ const refs = {
 }  
 
 refs.startBtn.disabled = true;
-const currentDate = Date.now()
 
+const currentDate = new Date();
+let timer = 0;
+
+//console.log('current', currentDate)
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-    onClose(selectedDates) {
-        setInterval(() => {
-            const currentDate = Date.now();
-            console.log(currentDate)
-        }, 1000)
-    console.log(selectedDates[0]);
+    onClose(selectedDates) { 
+        const delta = selectedDates[0] - currentDate;
+        console.log('selectedDates', selectedDates[0]);
+        console.log('current', currentDate)
+        console.log('delta', delta)
+        
+        if (delta <= 0) {
+            alert("Please choose a date in the future");
+            return;
+        } else {
+            refs.startBtn.disabled = false;
+        }      
   },
 };
+
+refs.startBtn.addEventListener('click', () => {
+timer = setInterval(() => {
+    
+}, 1000)
+})
+
 
 flatpickr(refs.dateTimePicker, options);
 
