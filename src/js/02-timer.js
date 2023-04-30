@@ -12,7 +12,7 @@ const refs = {
 
 refs.startBtn.disabled = true;
 
-let timer = 0;
+let timerId = 0;
 
 //console.log('current', currentDate)
 const options = {
@@ -23,9 +23,9 @@ const options = {
     onClose(selectedDates) { 
         const currentDate = Date.now();
         const delta = selectedDates[0] - currentDate;
-        console.log('selectedDates', selectedDates[0]);
-        console.log('current', currentDate)
-        console.log('delta', delta)
+        //console.log('selectedDates', selectedDates[0]);
+        //console.log('current', currentDate)
+        //console.log('delta', delta)
         
         if (delta <= 0) {
             alert("Please choose a date in the future");
@@ -41,15 +41,19 @@ const datePicker = flatpickr(refs.dateTimePicker, options);
 
 
 refs.startBtn.addEventListener('click', () => {
-timer = setInterval(() => {
-    const newDate = Date.now();
-    const currentDelta = datePicker.selectedDates[0] - newDate;
-    //console.log(currentDelta);
-    const {days, hours, minutes, seconds} = convertMs(currentDelta);
-    console.log(`${days}:${hours}:${minutes}:${seconds}`);
-   updateTimerFace({days, hours, minutes, seconds});
-}, 1000)
-     
+    timerId = setInterval(() => {
+        const newDate = Date.now();
+        const currentDelta = datePicker.selectedDates[0] - newDate;
+        //console.log(timerId);
+        const { days, hours, minutes, seconds } = convertMs(currentDelta);
+        console.log(`${days}:${hours}:${minutes}:${seconds}`);
+        updateTimerFace({ days, hours, minutes, seconds });
+    }, 1000);
+
+    const shouldStopTimer =
+    if (shouldStopTimer) {
+        clearTimerId(timerId)
+    }
 })
 
 
