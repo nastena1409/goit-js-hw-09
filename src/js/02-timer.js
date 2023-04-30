@@ -49,16 +49,15 @@ refs.startBtn.addEventListener('click', () => {
         const newDate = Date.now();
         const currentDelta = datePicker.selectedDates[0] - newDate;
         //console.log(timerId);
+        if (currentDelta <= 0) {
+            clearInterval(timerId)
+            Notiflix.Notify.success('Timer is over');
+            timerInput.disabled = false;
+        }
         const { days, hours, minutes, seconds } = convertMs(currentDelta);
         console.log(`${days}:${hours}:${minutes}:${seconds}`);
         updateTimerFace({ days, hours, minutes, seconds });
     }, 1000);
-
-    
-    if (timerId = 0) {
-        clearTimerId(timerId);
-        return;
-    }
 })
 
 
