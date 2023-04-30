@@ -8,7 +8,8 @@ const refs = {
     daysOutput: document.querySelector('span[data-days]'),
     hoursOutput: document.querySelector('span[data-hours]'),
     minutesOutput: document.querySelector('span[data-minutes]'),
-    secondsOutput: document.querySelector('span[data-seconds]')
+    secondsOutput: document.querySelector('span[data-seconds]'),
+    
 }  
 
 refs.startBtn.disabled = true;
@@ -42,6 +43,8 @@ const datePicker = flatpickr(refs.dateTimePicker, options);
 
 
 refs.startBtn.addEventListener('click', () => {
+    refs.startBtn.disabled = true;
+    refs.dateTimePicker.disabled = true;
     timerId = setInterval(() => {
         const newDate = Date.now();
         const currentDelta = datePicker.selectedDates[0] - newDate;
@@ -51,10 +54,11 @@ refs.startBtn.addEventListener('click', () => {
         updateTimerFace({ days, hours, minutes, seconds });
     }, 1000);
 
-    //const shouldStopTimer =
-    //if (shouldStopTimer) {
-      //  clearTimerId(timerId)
-    //}
+    
+    if (timerId = 0) {
+        clearTimerId(timerId);
+        return;
+    }
 })
 
 
