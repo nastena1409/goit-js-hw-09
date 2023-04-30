@@ -1,5 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
 
 const refs = {
     dateTimePicker: document.querySelector('#datetime-picker'),
@@ -28,7 +29,7 @@ const options = {
         //console.log('delta', delta)
         
         if (delta <= 0) {
-            alert("Please choose a date in the future");
+            Notiflix.Notify.failure("Please choose a date in the future");
             return;
         } else {
             refs.startBtn.disabled = false;
@@ -50,10 +51,10 @@ refs.startBtn.addEventListener('click', () => {
         updateTimerFace({ days, hours, minutes, seconds });
     }, 1000);
 
-    const shouldStopTimer =
-    if (shouldStopTimer) {
-        clearTimerId(timerId)
-    }
+    //const shouldStopTimer =
+    //if (shouldStopTimer) {
+      //  clearTimerId(timerId)
+    //}
 })
 
 
