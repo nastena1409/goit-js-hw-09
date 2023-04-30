@@ -12,7 +12,6 @@ const refs = {
 
 refs.startBtn.disabled = true;
 
-const currentDate = new Date();
 let timer = 0;
 
 //console.log('current', currentDate)
@@ -22,6 +21,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
     onClose(selectedDates) { 
+        const currentDate = Date.now();
         const delta = selectedDates[0] - currentDate;
         console.log('selectedDates', selectedDates[0]);
         console.log('current', currentDate)
@@ -36,14 +36,18 @@ const options = {
   },
 };
 
+const datePicker = flatpickr(refs.dateTimePicker, options);
+//console.log(datePicker)
+
 refs.startBtn.addEventListener('click', () => {
 timer = setInterval(() => {
-    
+    const newDate = Date.now();
+    const currentDelta = datePicker.selectedDates[0] - newDate;
+    console.log(currentDelta);
+    //console.log('new', newDate)
 }, 1000)
 })
 
-
-flatpickr(refs.dateTimePicker, options);
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
